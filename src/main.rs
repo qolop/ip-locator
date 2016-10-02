@@ -48,28 +48,17 @@ fn request_ip_info(addr: &String) -> Option<IPAddrInfo> {
     let mut body = String::new();
     response.read_to_string(&mut body).unwrap();
     let p: Vec<&str> = body.trim().split("\n").collect();
-    return match p[0] {
-        "success" => {
-            Some(IPAddrInfo {
-                country: p[1].to_string(),
-                country_code: p[2].to_string(),
-                region_code: p[3].to_string(),
-                region: p[4].to_string(),
-                city: p[5].to_string(),
-                zip_code: p[6].to_string(),
-                latitude: p[7].to_string(),
-                longitude: p[8].to_string(),
-                time_zone: p[9].to_string(),
-                isp: p[10].to_string(),
-                organization: p[11].to_string(),
-            })
-        }
-        "fail" => {
-            println!("IP could not be found by the API.");
-            None
-        }
-        _ => {
-            None
-        }
-    };
+    Some(IPAddrInfo {
+        country: p[1].to_string(),
+        country_code: p[2].to_string(),
+        region_code: p[3].to_string(),
+        region: p[4].to_string(),
+        city: p[5].to_string(),
+        zip_code: p[6].to_string(),
+        latitude: p[7].to_string(),
+        longitude: p[8].to_string(),
+        time_zone: p[9].to_string(),
+        isp: p[10].to_string(),
+        organization: p[11].to_string(),
+    })
 }
