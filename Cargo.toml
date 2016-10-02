@@ -1,0 +1,7 @@
+[package]
+name = "ip_locator"
+version = "0.1.0"
+authors = ["pmccann"]
+
+[dependencies]
+hyper = "*"
