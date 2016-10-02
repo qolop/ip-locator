@@ -50,7 +50,7 @@ fn request_ip_info(addr: &String) -> Option<IPAddrInfo> {
     let p: Vec<&str> = body.trim().split("\n").collect();
     return match p[0] {
         "success" => {
-            let s = IPAddrInfo {
+            Some(IPAddrInfo {
                 country: p[1].to_string(),
                 country_code: p[2].to_string(),
                 region_code: p[3].to_string(),
@@ -62,10 +62,14 @@ fn request_ip_info(addr: &String) -> Option<IPAddrInfo> {
                 time_zone: p[9].to_string(),
                 isp: p[10].to_string(),
                 organization: p[11].to_string(),
-            };
-            Some(s)
+            })
         }
-        "fail" => panic!("IP could not be found by the API."),
-        _ => panic!("Network error."),
+        "fail" => {
+            println!("IP could not be found by the API.");
+            None
+        }
+        _ => {
+            None
+        }
     };
 }
